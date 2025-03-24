@@ -60,7 +60,8 @@ pip install airsim
 
 ### 4. 启动 AirSim 模拟器
 
-- 解压 `AirSimInspection.zip` 文件。
+- 从此处下载 `AirSimInspection.zip` [Releases](https://github.com/microsoft/PromptCraft-Robotics/releases)，并解压 `AirSimInspection.zip` 文件。
+- 复制`settings.json`到`AirSimInspection` 文件夹。
 - 进入 `AirSimInspection` 文件夹，运行 `run.bat` 以启动 AirSim 仿真环境。
 
 ---
