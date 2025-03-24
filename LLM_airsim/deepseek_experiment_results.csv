@@ -1,0 +1,242 @@
+任务类型,模型,实验次数,生成代码,代码执行状态,任务完成状态,响应时间(s)
+基础任务,DeepSeek,1/3,"# 让无人机起飞
+aw.takeoff()
+
+# 让无人机降落
+aw.land()
+",✅,✅,11.18
+基础任务,DeepSeek,2/3,"# 让无人机起飞
+aw.takeoff()
+
+# 让无人机降落
+aw.land()
+",✅,✅,11.8
+基础任务,DeepSeek,3/3,"# 让无人机起飞
+aw.takeoff()
+
+# 让无人机降落
+aw.land()
+",✅,✅,14.46
+基础任务,DeepSeek,平均值,平均响应时间: 12.48s | 成功率: 100.0%,-,-,12.48
+单点导航,DeepSeek,1/3,"# 获取涡轮机2的当前位置
+turbine2_position = aw.get_position(""turbine2"")
+
+# 计算无人机应该飞到的位置
+# X轴负方向12米：turbine2_position[0] - 12
+# Y轴保持不变：turbine2_position[1]
+# 高度50米：50
+target_position = [turbine2_position[0] - 12, turbine2_position[1], 50]
+
+# 控制无人机飞到目标位置
+aw.fly_to(target_position)
+",✅,✅,21.38
+单点导航,DeepSeek,2/3,"# 获取涡轮机2的位置
+turbine2_position = aw.get_position(""turbine2"")
+
+# 计算无人机应该飞到的位置
+# 沿 X 轴负方向保持 12 米距离，所以 X 坐标减去 12
+# 高度达到 50 米，所以 Z 坐标设置为 50
+target_position = [turbine2_position[0] - 12, turbine2_position[1], 50]
+
+# 让无人机飞到目标位置
+aw.fly_to(target_position)
+",✅,✅,22.77
+单点导航,DeepSeek,3/3,"# 获取涡轮机2的当前位置
+turbine2_position = aw.get_position(""turbine2"")
+
+# 计算无人机应该飞到的目标位置
+# X轴负方向12米：turbine2_position[0] - 12
+# Y轴保持不变：turbine2_position[1]
+# 高度为50米：50
+target_position = [turbine2_position[0] - 12, turbine2_position[1], 50]
+
+# 控制无人机飞到目标位置
+aw.fly_to(target_position)
+",✅,✅,23.05
+单点导航,DeepSeek,平均值,平均响应时间: 22.4s | 成功率: 100.0%,-,-,22.4
+路径规划,DeepSeek,1/3,"# 获取每个塔的坐标
+tower3_pos = aw.get_position(""tower3"")
+tower2_pos = aw.get_position(""tower2"")
+tower1_pos = aw.get_position(""tower1"")
+
+# 计算无人机应该飞行的路径点
+# 与塔沿 X 轴负方向保持 10 米距离，高度为 50 米
+path = [
+    [tower3_pos[0] - 10, tower3_pos[1], 50],  # 绕 tower3
+    [tower2_pos[0] - 10, tower2_pos[1], 50],  # 绕 tower2
+    [tower1_pos[0] - 10, tower1_pos[1], 50]   # 绕 tower1
+]
+
+# 起飞
+aw.takeoff()
+
+# 沿着路径飞行
+aw.fly_path(path)
+
+# 降落
+aw.land()
+",✅,✅,29.37
+路径规划,DeepSeek,2/3,"# 获取每个塔的坐标
+tower3_pos = aw.get_position(""tower3"")
+tower2_pos = aw.get_position(""tower2"")
+tower1_pos = aw.get_position(""tower1"")
+
+# 计算无人机应该飞行的路径点
+# 保持高度为 50 米，并且与塔沿 X 轴负方向保持 10 米的距离
+path_point1 = [tower3_pos[0] - 10, tower3_pos[1], 50]  # 绕 tower3
+path_point2 = [tower2_pos[0] - 10, tower2_pos[1], 50]  # 绕 tower2
+path_point3 = [tower1_pos[0] - 10, tower1_pos[1], 50]  # 绕 tower1
+
+# 将路径点组合成一个列表
+path = [path_point1, path_point2, path_point3]
+
+# 让无人机起飞
+aw.takeoff()
+
+# 让无人机沿着路径飞行
+aw.fly_path(path)
+
+# 让无人机降落
+aw.land()
+",✅,✅,28.71
+路径规划,DeepSeek,3/3,"# 获取每个塔的坐标
+tower3_pos = aw.get_position(""tower3"")
+tower2_pos = aw.get_position(""tower2"")
+tower1_pos = aw.get_position(""tower1"")
+
+# 计算无人机应该飞行的路径点
+# 保持高度为 50 米，并且与塔沿 X 轴负方向保持 10 米的距离
+path_point1 = [tower3_pos[0] - 10, tower3_pos[1], 50]  # 绕 tower3
+path_point2 = [tower2_pos[0] - 10, tower2_pos[1], 50]  # 绕 tower2
+path_point3 = [tower1_pos[0] - 10, tower1_pos[1], 50]  # 绕 tower1
+
+# 定义飞行路径
+path = [path_point1, path_point2, path_point3]
+
+# 起飞
+aw.takeoff()
+
+# 沿着路径飞行
+aw.fly_path(path)
+
+# 降落
+aw.land()
+",✅,✅,29.16
+路径规划,DeepSeek,平均值,平均响应时间: 29.08s | 成功率: 100.0%,-,-,29.08
+复杂飞行,DeepSeek,1/3,"import numpy as np
+
+# 获取太阳能面板的坐标
+solar_position = aw.get_position(""solarpanels"")
+x, y, z = solar_position
+
+# 设置无人机起飞点（最右前端顶点，高度为5米）
+start_x = x
+start_y = y
+start_z = z - 5  # 高度为5米
+
+# 起飞
+aw.takeoff()
+
+# 飞到起飞点
+aw.fly_to([start_x, start_y, start_z])
+
+# 定义阵列的宽度和长度
+width = 30  # 前后宽度
+length = 50  # 左右长度
+
+# 将长度均分为10行
+rows = 10
+row_step = length / rows
+
+# 扫描整个阵列
+for i in range(rows):
+    # 计算当前行的起点和终点
+    current_y = y - i * row_step
+    start_point = [x, current_y, start_z]
+    end_point = [x - width, current_y, start_z]
+    
+    # 飞到当前行的起点
+    aw.fly_to(start_point)
+    
+    # 沿宽度方向扫描
+    aw.fly_to(end_point)
+
+# 完成扫描后降落
+aw.land()
+",✅,✅,33.45
+复杂飞行,DeepSeek,2/3,"import numpy as np
+
+# 获取太阳能面板的坐标
+solar_position = aw.get_position(""solarpanels"")
+x, y, z = solar_position
+
+# 设置无人机起飞点，即阵列的最右前端顶点，并保持飞行高度为5米
+start_x = x
+start_y = y
+start_z = z - 5  # 向上飞行5米
+
+# 起飞
+aw.takeoff()
+
+# 飞到起飞点
+aw.fly_to([start_x, start_y, start_z])
+
+# 定义阵列的宽度和长度
+width = 30  # 前后宽度
+length = 50  # 左右长度
+
+# 将长度均分为10行
+rows = 10
+row_length = length / rows
+
+# 扫描整个阵列
+for i in range(rows):
+    # 计算当前行的起点和终点
+    current_y = start_y - i * row_length
+    start_point = [start_x, current_y, start_z]
+    end_point = [start_x - width, current_y, start_z]
+    
+    # 飞往当前行的起点
+    aw.fly_to(start_point)
+    
+    # 沿宽度方向扫描当前行
+    aw.fly_to(end_point)
+
+# 完成扫描后，返回起飞点并降落
+aw.fly_to([start_x, start_y, start_z])
+aw.land()
+",✅,✅,32.58
+复杂飞行,DeepSeek,3/3,"import numpy as np
+
+# 获取太阳能面板阵列的坐标
+solarpanels_pos = aw.get_position(""solarpanels"")
+x, y, z = solarpanels_pos
+
+# 无人机起飞并飞到阵列的最右前端顶点，保持高度为5米
+aw.takeoff()
+aw.fly_to([x, y, z - 5])  # z-5 表示高度为5米
+
+# 定义阵列的宽度和长度
+width = 30  # 前后宽度
+length = 50  # 左右长度
+
+# 将长度均分为10行
+rows = 10
+row_length = length / rows
+
+# 扫描整个阵列
+for i in range(rows):
+    # 计算当前行的起点和终点
+    start_y = y - i * row_length
+    end_y = start_y
+    start_x = x
+    end_x = x - width
+
+    # 沿宽度方向从前到后扫描
+    aw.fly_to([start_x, start_y, z - 5])
+    aw.fly_to([end_x, end_y, z - 5])
+
+# 扫描完成后，无人机降落
+aw.land()
+",✅,✅,31.85
+复杂飞行,DeepSeek,平均值,平均响应时间: 32.63s | 成功率: 100.0%,-,-,32.63

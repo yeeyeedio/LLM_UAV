@@ -1,0 +1,206 @@
+任务类型,模型,实验次数,生成代码,代码执行状态,任务完成状态,响应时间(s)
+基础任务,ChatGPT,1/3,"# 让无人机起飞
+aw.takeoff()
+
+# 降落无人机
+aw.land()
+",✅,✅,2.71
+基础任务,ChatGPT,2/3,"# 让无人机起飞
+aw.takeoff()
+
+# 降落无人机
+aw.land()
+",✅,✅,1.93
+基础任务,ChatGPT,3/3,"# 让无人机起飞
+aw.takeoff()
+
+# 降落无人机
+aw.land()
+",✅,✅,1.75
+基础任务,ChatGPT,平均值,平均响应时间: 2.13s | 成功率: 100.0%,-,-,2.13
+单点导航,ChatGPT,1/3,"# 获取涡轮机2的坐标
+turbine2_position = aw.get_position(""turbine2"")
+
+# 计算目标坐标
+target_position = [
+    turbine2_position[0] - 12,  # 沿 X 轴负方向移动 12 米
+    turbine2_position[1],        # Y 坐标保持不变
+    50                            # Z 坐标设置为 50 米
+]
+
+# 飞向目标坐标
+aw.fly_to(target_position)
+",✅,✅,4.51
+单点导航,ChatGPT,2/3,"# 获取涡轮机2的坐标
+turbine2_position = aw.get_position(""turbine2"")
+
+# 计算目标坐标
+target_position = [
+    turbine2_position[0] - 12,  # 沿 X 轴负方向移动 12 米
+    turbine2_position[1],        # Y 坐标保持不变
+    50                            # Z 坐标设置为 50 米
+]
+
+# 飞向目标坐标
+aw.fly_to(target_position)
+",✅,✅,4.66
+单点导航,ChatGPT,3/3,"# 获取涡轮机2的坐标
+turbine2_position = aw.get_position(""turbine2"")
+
+# 计算目标坐标
+target_x = turbine2_position[0] - 12  # 沿 X 轴负方向移动 12 米
+target_y = turbine2_position[1]        # Y 坐标保持不变
+target_z = 50                           # 高度设置为 50 米
+
+# 飞向目标坐标
+aw.fly_to([target_x, target_y, target_z])
+",✅,✅,5.1
+单点导航,ChatGPT,平均值,平均响应时间: 4.76s | 成功率: 100.0%,-,-,4.76
+路径规划,ChatGPT,1/3,"# 获取每个塔的坐标
+tower3_position = aw.get_position(""tower3"")
+tower2_position = aw.get_position(""tower2"")
+tower1_position = aw.get_position(""tower1"")
+
+# 计算无人机的目标坐标
+# tower3
+target1 = [tower3_position[0] - 10, tower3_position[1], 50]  # X轴负方向10米，Y轴保持不变，高度50米
+# tower2
+target2 = [tower2_position[0] - 10, tower2_position[1], 50]  # X轴负方向10米，Y轴保持不变，高度50米
+# tower1
+target3 = [tower1_position[0] - 10, tower1_position[1], 50]  # X轴负方向10米，Y轴保持不变，高度50米
+
+# 创建路径
+path = [target1, target2, target3]
+
+# 沿着路径飞行
+aw.fly_path(path)
+",✅,✅,6.61
+路径规划,ChatGPT,2/3,"# 获取每个塔的位置
+tower3_position = aw.get_position(""tower3"")
+tower2_position = aw.get_position(""tower2"")
+tower1_position = aw.get_position(""tower1"")
+
+# 计算无人机的目标位置
+# 无人机在每个塔的 X 轴负方向 10 米，Y 轴保持不变，Z 轴为 50 米
+drone_positions = [
+    [tower3_position[0] - 10, tower3_position[1], 50],  # tower3
+    [tower2_position[0] - 10, tower2_position[1], 50],  # tower2
+    [tower1_position[0] - 10, tower1_position[1], 50]   # tower1
+]
+
+# 沿着计算出的路径飞行
+aw.fly_path(drone_positions)
+",✅,✅,6.25
+路径规划,ChatGPT,3/3,"# 获取每个塔的位置
+tower3_position = aw.get_position(""tower3"")
+tower2_position = aw.get_position(""tower2"")
+tower1_position = aw.get_position(""tower1"")
+
+# 设置无人机的高度和与塔的距离
+height = 50
+distance = 10
+
+# 计算无人机的目标位置
+# tower3
+target_position1 = [tower3_position[0] - distance, tower3_position[1], height]
+# tower2
+target_position2 = [tower2_position[0] - distance, tower2_position[1], height]
+# tower1
+target_position3 = [tower1_position[0] - distance, tower1_position[1], height]
+
+# 创建路径
+path = [target_position1, target_position2, target_position3]
+
+# 沿着路径飞行
+aw.fly_path(path)
+",✅,✅,6.28
+路径规划,ChatGPT,平均值,平均响应时间: 6.38s | 成功率: 100.0%,-,-,6.38
+复杂飞行,ChatGPT,1/3,"# 获取太阳能面板的坐标
+solar_position = aw.get_position(""solarpanels"")
+x, y, z = solar_position
+
+# 起飞高度
+z_target = z - 5  # 飞行高度为5米
+
+# 起飞
+aw.takeoff()
+
+# 扫描参数
+num_rows = 10
+row_length = 50 / num_rows  # 每行的长度为5米
+width = 30  # 阵列的宽度为30米
+
+# 扫描过程
+for i in range(num_rows):
+    # 计算当前行的起点坐标
+    start_x = x
+    start_y = y - (i * row_length)
+    
+    # 飞到当前行的起点
+    aw.fly_to([start_x, start_y, z_target])
+    
+    # 沿着当前行扫描，从前到后
+    aw.fly_to([start_x - width, start_y, z_target])
+    
+# 降落
+aw.land()
+",✅,✅,7.89
+复杂飞行,ChatGPT,2/3,"# 获取太阳能面板的坐标
+solar_position = aw.get_position(""solarpanels"")
+x, y, z = solar_position
+
+# 设置飞行高度
+flight_height = 5
+
+# 起飞到最右前端顶点
+aw.takeoff()
+aw.fly_to([x, y, z + flight_height])  # 飞到起飞高度
+
+# 设置行数和每行的长度
+num_rows = 10
+row_length = 50 / num_rows  # 每行的长度
+
+# 扫描整个面板阵列
+for i in range(num_rows):
+    # 计算当前行的起始和结束位置
+    start_x = x
+    end_x = x - 30
+    current_y = y - (i * row_length)  # 当前行的Y坐标
+
+    # 从右到左飞行扫描
+    aw.fly_to([start_x, current_y, z + flight_height])  # 飞到行的起始位置
+    aw.fly_to([end_x, current_y, z + flight_height])    # 飞到行的结束位置
+
+# 完成扫描后降落
+aw.land()
+",✅,✅,6.71
+复杂飞行,ChatGPT,3/3,"# 获取太阳能面板的坐标
+solar_position = aw.get_position(""solarpanels"")
+x, y, z = solar_position
+
+# 起飞高度
+fly_height = 5
+
+# 起飞
+aw.takeoff()
+
+# 设置无人机的飞行高度
+z = z - fly_height
+
+# 每行的间隔
+num_rows = 10
+row_length = 50 / num_rows  # 每行的长度
+
+# 扫描整个面板阵列
+for i in range(num_rows):
+    # 计算当前行的起点
+    start_y = y - (i * row_length)
+    
+    # 从右前端顶点飞到左前端顶点
+    aw.fly_to([x, start_y, z])  # 飞到右前端
+    aw.fly_to([x - 30, start_y, z])  # 飞到左前端
+
+# 降落
+aw.land()
+",✅,✅,8.15
+复杂飞行,ChatGPT,平均值,平均响应时间: 7.58s | 成功率: 100.0%,-,-,7.58
